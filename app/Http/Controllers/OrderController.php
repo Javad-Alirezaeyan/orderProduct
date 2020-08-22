@@ -71,7 +71,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $products = OrderProduct::fullGet(['brand_id'=>$id]);
+        $products = OrderProduct::fullGet(['order_id'=>$id]);
 
         return view("order.view",[
             'order' => $order,
