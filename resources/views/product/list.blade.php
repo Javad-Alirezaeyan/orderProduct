@@ -33,7 +33,7 @@
                     <td>{{ $product->name }}</td>
                     <td>
                         <a href="{{ subdirUrl("checkout") }}?productId={{$product->id}}" class="btn btn-warning btn-sm " role="button" aria-disabled="true"> Buy</a>
-                        <a href="{{ subdirUrl("addToBasket")  }}" class="btn btn-danger btn-sm " role="button" aria-disabled="true"> Add to Basket</a>
+                        <a href="{{ subdirUrl("addToBasket")  }}" class="btn btn-danger btn-sm disabled  " title="Unavailable" role="button" aria-disabled="true"> Add to Basket</a>
                     </td>
                 </tr>
 

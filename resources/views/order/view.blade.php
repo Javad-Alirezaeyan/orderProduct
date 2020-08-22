@@ -9,13 +9,14 @@
 ?>
 @extends('layouts.master')
 @section('title', "View order")
+<style>
+    .title-customer{
+        font-weight: bold;
+        font-size: 15px;
+    }
+</style>
 @section('content')
-    <style>
-        .title-customer{
-            font-weight: bold;
-            font-size: 15px;
-        }
-    </style>
+
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <div  style=" text-align:center;font-size: 18px;color: #8898aa; vertical-align: center" >
             order Id: {{ $order->id }}
@@ -81,6 +82,27 @@
                 <div>
                     <span class="title-customer"> Email:</span>
                     <span>{{ $order->client_email }}</span>
+                </div>
+            </div>
+        </div>
+
+        <?php $card = json_decode($order->client_card, true) ?>
+        <div class="card" style="margin-top: 20px">
+            <div class="card-header">
+                Card Info
+            </div>
+            <div class="card-body">
+                <div>
+                    <span class="title-customer" > Card Number:</span>
+                    <span>{{ $card['cardNumber'] }}</span>
+                </div>
+                <div>
+                    <span class="title-customer"> Expiration:</span>
+                    <span>{{ $card['year']."-". $card['month']}}</span>
+                </div>
+                <div>
+                    <span class="title-customer"> CVV:</span>
+                    <span>{{ $card['cvv'] }}</span>
                 </div>
             </div>
         </div>
