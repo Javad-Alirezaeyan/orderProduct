@@ -4,7 +4,7 @@
         <hr class="mb-4">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="firstName">First name</label>
+                    <label for="firstName">First name<span class="text-danger">*</span> </label>
                     <input type="text" class="form-control" name="firstName" id="firstName" placeholder=""
                            v-on:blur="setInfo()" v-model="firstName"
                            value="" required="">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
+                    <label for="lastName">Last name<span class="text-danger">*</span> </label>
                     <input type="text" class="form-control" name="lastName" id="lastName" placeholder=""
                            v-model="lastName"
                            v-on:blur="setInfo()"
@@ -25,7 +25,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="address">Email</label>
+                <label for="address">Email<span class="text-danger">*</span> </label>
                 <input type="email" class="form-control" name="email" id="email"  v-on:blur="setInfo()"  v-model="email" required="">
                 <div class="invalid-feedback">
                     Please enter your email.
@@ -33,7 +33,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="address">Address</label>
+                <label for="address">Address <span class="text-danger">*</span> </label>
                 <input type="text" class="form-control" v-model="address"  v-on:blur="setInfo()"  name="address" id="address" required="">
                 <div class="invalid-feedback">
                     Please enter your shipping address.

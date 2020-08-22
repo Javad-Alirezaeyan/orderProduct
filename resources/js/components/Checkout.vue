@@ -2,7 +2,7 @@
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <div class="row">
             <div class="col-md-12 order-md-1">
-
+                <div id="errorMessage" class="text-danger"></div>
                 <Basket></Basket>
                 <CustoemrInfo></CustoemrInfo>
                 <CardInfo></CardInfo>
@@ -12,7 +12,6 @@
                         <span style="display: none" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Continue to checkout</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -62,36 +61,43 @@
                     '_token': window.Laravel.csrfToken
 
                 }
+               // clear error message
+                $("#errorMessage").css("display", 'none').html("");
+
                 $.ajax({
                     url         :   'registerOrder',
                     type        :   'post',
                     dataType    :   'json',
-                    data        :   data, /*{
-                        'body'  :   data,
-                        '_token':   window.Laravel.csrfToken,
-                    }*/
-                }) .done(function (res, textStatus, xhr) {
-                    if (xhr.status == 200){
-                        //show confirmation
-                        console.log(res);
-                        window.location.href = "/order/"+ res.orderId +"/view"
-                    }
-                    else{
-                      //  console.log(res['message']);
-                        alert(res['message'])
-                    }
+                    data        :   data,
+                }).done(function (res, textStatus, xhr) {
+                    //console.log(res);
+                     window.location.href = "order/"+ res.orderId
                     $("#btnCheckout").attr("disabled", false);
                     $("#btnCheckout span").css("display", 'none');
 
-                })
-                    .fail(function (jqXHR, textStatus) {
-                     //   console.log("error", jqXHR.responseText);
-                        alert("error: "+ jqXHR.responseText);
+                }).fail(function (jqXHR, textStatus) {
+                       if (jqXHR.status == 400){
+                           let a = JSON.parse(jqXHR.responseText );
+                           let errorMsg = "";
+                           for(let key in a){
+                              errorMsg += a[key] + "<br/>";
+                           }
+                           $("#errorMessage").css("display", 'block').html(errorMsg);
+                           window.scrollTo(0, 0);
+                       }
+                       else{
+                           alert("error: "+ jqXHR.responseText);
+                       }
+
                         $("#btnCheckout").attr("disabled", false);
                         $("#btnCheckout span").css("display", 'none');
 
                     });
             },
+
+            showError(error){
+                  alert();
+            }
         },
         created(){
         }

@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="name">Name on card</label>
+                <label for="name">Name on card<span class="text-danger">*</span> </label>
                 <input type="text" v-model="name" class="form-control" id="name" placeholder="" v-on:blur="setInfo()" required>
                 <small class="text-muted">Full name as displayed on card</small>
                 <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="cardNumber">Credit card number</label>
+                <label for="cardNumber">Credit card number<span class="text-danger">*</span> </label>
                 <input type="text" v-model="cardNumber" value="4242424242424242" class="form-control" id="cardNumber" v-on:blur="setInfo()" placeholder="" required>
                 <div class="invalid-feedback">
                     Credit card number is required
@@ -35,7 +35,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label >Expiration</label>
+                <label >Expiration<span class="text-danger">*</span> </label>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <select id="year" v-model="year" v-on:blur="setInfo()" class="form-control">
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="cvv">CVV</label>
+                <label for="cvv">CVV<span class="text-danger">*</span> </label>
                 <input type="text" v-model="cvv"  class="form-control" v-on:blur="setInfo()"  id="cvv" placeholder="" required>
                 <div class="invalid-feedback">
                     Security code required

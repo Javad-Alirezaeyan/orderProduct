@@ -1,9 +1,9 @@
 <template>
     <div>
         <h4 class="border-bottom border-gray pb-2 mb-0">Basket info</h4>
-        <table class="invoice-items" cellspacing="0" cellpadding="0">
+        <div style="display: none ">{{ product }}</div>
+        <table class="invoice-items" width="100%" cellspacing="0" cellpadding="0">
             <tbody>
-            {{ product }}
             <tr>
                 <td>{{ product.name }}</td>
                 <td class="alignright">$ {{ product.price }}</td>
@@ -13,8 +13,8 @@
                 <td class="alignright">$ {{ shippingFee}}</td>
             </tr>
             <tr class="total">
-                <td class="alignright" width="80%">Total</td>
-                <td class="alignright">$ {{ parseFloat(product.price) + parseFloat(shippingFee) }}</td>
+                <td class="alignright font-weight-bold" width="80%">Total</td>
+                <td class="alignright font-weight-bold">$ {{ parseFloat(product.price) + parseFloat(shippingFee) }}</td>
             </tr>
             </tbody>
         </table>
