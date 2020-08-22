@@ -51,10 +51,10 @@
 
         data(){
             return{
-                firstName: "Javad",
-                lastName : "ali",
-                email: "a@gmail.com",
-                address: "jsdjkkjd"
+                firstName: "",
+                lastName : "",
+                email: "",
+                address: ""
             }
         },
         methods:{
