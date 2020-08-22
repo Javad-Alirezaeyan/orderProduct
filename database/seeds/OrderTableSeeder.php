@@ -23,6 +23,16 @@ class OrderTableSeeder extends Seeder
                 'total_shipping_value'=> 10,
                 'client_name'=> $faker->name,
                 'client_address'=>$faker->address,
+                'client_email'=>$faker->safeEmail,
+                'client_card' => json_encode(
+                    [
+                        'name' => $faker->firstName,
+                        'cardNumber' => $faker->creditCardNumber,
+                        'year' => $faker->year,
+                        'month' => $faker->month,
+                        'cvv' => $faker->numberBetween(100, 999)
+                    ]
+                )
             ]);
         }
     }

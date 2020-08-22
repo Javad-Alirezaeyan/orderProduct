@@ -20,6 +20,8 @@ class CreateOrderTable extends Migration
             $table->float("total_shipping_value")->default(0);
             $table->string('client_name', 300);
             $table->string("client_address", 1000);
+            $table->string("client_email", 200);
+            $table->json("client_card");
             $table->integer("state")->default(0);
             $table->timestamps();
         });
