@@ -129,7 +129,7 @@
 
             <div class="col-md-12" style="height: 40px;background-color: #1b1e21; color: white" >
                 <span style="font-size: 20px" class="text-left  font-weight-bold "> Amount</span>
-                <span class="float-right font-weight-bold"> {{ $order->total_product_value }}</span>
+                <span class="float-right font-weight-bold"> {{ $order->total_product_value + $order->total_shipping_value  }}</span>
             </div>
 
         </div>
