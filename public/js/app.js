@@ -2130,7 +2130,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -2177,43 +2176,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   card: _this.$store.state.cardInfo,
                   shippingFee: _this.$store.state.shippingFee,
                   '_token': window.Laravel.csrfToken
-                };
+                }; // clear error message
+
+                $("#errorMessage").css("display", 'none').html("");
                 $.ajax({
                   url: 'registerOrder',
                   type: 'post',
                   dataType: 'json',
                   data: data
-                  /*{
-                  'body'  :   data,
-                  '_token':   window.Laravel.csrfToken,
-                  }*/
-
                 }).done(function (res, textStatus, xhr) {
-                  if (xhr.status == 200) {
-                    //show confirmation
-                    console.log(res);
-                    window.location.href = "/order/" + res.orderId + "/view";
+                  //console.log(res);
+                  window.location.href = "order/" + res.orderId;
+                  $("#btnCheckout").attr("disabled", false);
+                  $("#btnCheckout span").css("display", 'none');
+                }).fail(function (jqXHR, textStatus) {
+                  if (jqXHR.status == 400) {
+                    var a = JSON.parse(jqXHR.responseText);
+                    var errorMsg = "";
+
+                    for (var key in a) {
+                      errorMsg += a[key] + "<br/>";
+                    }
+
+                    $("#errorMessage").css("display", 'block').html(errorMsg);
+                    window.scrollTo(0, 0);
                   } else {
-                    //  console.log(res['message']);
-                    alert(res['message']);
+                    alert("error: " + jqXHR.responseText);
                   }
 
                   $("#btnCheckout").attr("disabled", false);
                   $("#btnCheckout span").css("display", 'none');
-                }).fail(function (jqXHR, textStatus) {
-                  //   console.log("error", jqXHR.responseText);
-                  alert("error: " + jqXHR.responseText);
-                  $("#btnCheckout").attr("disabled", false);
-                  $("#btnCheckout span").css("display", 'none');
                 });
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    showError: function showError(error) {
+      alert();
     }
   },
   created: function created() {}
@@ -39386,15 +39390,18 @@ var render = function() {
       _vm._v("Basket info")
     ]),
     _vm._v(" "),
+    _c("div", { staticStyle: { display: "none" } }, [
+      _vm._v(_vm._s(_vm.product))
+    ]),
+    _vm._v(" "),
     _c(
       "table",
       {
         staticClass: "invoice-items",
-        attrs: { cellspacing: "0", cellpadding: "0" }
+        attrs: { width: "100%", cellspacing: "0", cellpadding: "0" }
       },
       [
         _c("tbody", [
-          _vm._v("\n        " + _vm._s(_vm.product) + "\n        "),
           _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm.product.name))]),
             _vm._v(" "),
@@ -39412,11 +39419,16 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", { staticClass: "total" }, [
-            _c("td", { staticClass: "alignright", attrs: { width: "80%" } }, [
-              _vm._v("Total")
-            ]),
+            _c(
+              "td",
+              {
+                staticClass: "alignright font-weight-bold",
+                attrs: { width: "80%" }
+              },
+              [_vm._v("Total")]
+            ),
             _vm._v(" "),
-            _c("td", { staticClass: "alignright" }, [
+            _c("td", { staticClass: "alignright font-weight-bold" }, [
               _vm._v(
                 "$ " +
                   _vm._s(
@@ -39465,7 +39477,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 mb-3" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Name on card")]),
+        _vm._m(1),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39502,9 +39514,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6 mb-3" }, [
-        _c("label", { attrs: { for: "cardNumber" } }, [
-          _vm._v("Credit card number")
-        ]),
+        _vm._m(2),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39547,7 +39557,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 mb-3" }, [
-        _c("label", [_vm._v("Expiration")]),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39671,7 +39681,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6 mb-3" }, [
-        _c("label", { attrs: { for: "cvv" } }, [_vm._v("CVV")]),
+        _vm._m(4),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39768,6 +39778,42 @@ var staticRenderFns = [
         )
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "name" } }, [
+      _vm._v("Name on card"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cardNumber" } }, [
+      _vm._v("Credit card number"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("Expiration"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "cvv" } }, [
+      _vm._v("CVV"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
   }
 ]
 render._withStripped = true
@@ -39797,6 +39843,11 @@ var render = function() {
         "div",
         { staticClass: "col-md-12 order-md-1" },
         [
+          _c("div", {
+            staticClass: "text-danger",
+            attrs: { id: "errorMessage" }
+          }),
+          _vm._v(" "),
           _c("Basket"),
           _vm._v(" "),
           _c("CustoemrInfo"),
@@ -39860,7 +39911,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 mb-3" }, [
-        _c("label", { attrs: { for: "firstName" } }, [_vm._v("First name")]),
+        _vm._m(0),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39902,7 +39953,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6 mb-3" }, [
-        _c("label", { attrs: { for: "lastName" } }, [_vm._v("Last name")]),
+        _vm._m(1),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39945,7 +39996,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mb-3" }, [
-      _c("label", { attrs: { for: "address" } }, [_vm._v("Email")]),
+      _vm._m(2),
       _vm._v(" "),
       _c("input", {
         directives: [
@@ -39978,7 +40029,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mb-3" }, [
-      _c("label", { attrs: { for: "address" } }, [_vm._v("Address")]),
+      _vm._m(3),
       _vm._v(" "),
       _c("input", {
         directives: [
@@ -40017,7 +40068,44 @@ var render = function() {
     _c("br")
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "firstName" } }, [
+      _vm._v("First name"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "lastName" } }, [
+      _vm._v("Last name"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "address" } }, [
+      _vm._v("Email"),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "address" } }, [
+      _vm._v("Address "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -54235,17 +54323,14 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   mutations: {
-    SET_MESSAGE: function SET_MESSAGE(state, newValue) {
-      state.message = newValue;
-    },
     SET_PRODUCT: function SET_PRODUCT(state, product) {
       state.product = product;
     },
     SET_CARD_INFO: function SET_CARD_INFO(state, card) {
       state.cardInfo = card;
     },
-    SET_CUSTOMER_INFO: function SET_CUSTOMER_INFO(state, card) {
-      state.cardInfo = card;
+    SET_CUSTOMER_INFO: function SET_CUSTOMER_INFO(state, customer) {
+      state.customerInfo = customer;
     },
     SET_SHIPPING_FEE: function SET_SHIPPING_FEE(state, value) {
       state.shippingFee = value;
@@ -54253,35 +54338,29 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   actions: {
-    setMessage: function setMessage(_ref, newValue) {
+    setProduct: function setProduct(_ref, product) {
       var commit = _ref.commit,
           state = _ref.state;
-      commit('SET_MESSAGE', newValue);
-      return state.message;
-    },
-    setProduct: function setProduct(_ref2, product) {
-      var commit = _ref2.commit,
-          state = _ref2.state;
       commit('SET_PRODUCT', product);
       return state.product;
     },
-    setCardInfo: function setCardInfo(_ref3, card) {
-      var commit = _ref3.commit,
-          state = _ref3.state;
+    setCardInfo: function setCardInfo(_ref2, card) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
       commit('SET_CARD_INFO', card);
       return state.cardInfo;
     },
-    setCustomerInfo: function setCustomerInfo(_ref4, customer) {
-      var commit = _ref4.commit,
-          state = _ref4.state;
+    setCustomerInfo: function setCustomerInfo(_ref3, customer) {
+      var commit = _ref3.commit,
+          state = _ref3.state;
       commit('SET_CUSTOMER_INFO', customer);
       return state.customerInfo;
     },
-    setShippingFee: function setShippingFee(_ref5, customer) {
-      var commit = _ref5.commit,
-          state = _ref5.state;
-      commit('SET_SHIPPING_FEE', customer);
-      return state.customerInfo;
+    setShippingFee: function setShippingFee(_ref4, shippingFee) {
+      var commit = _ref4.commit,
+          state = _ref4.state;
+      commit('SET_SHIPPING_FEE', shippingFee);
+      return state.shippingFee;
     } // other actions
 
   }
