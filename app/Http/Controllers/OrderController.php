@@ -9,6 +9,7 @@ use App\OrderProduct;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Stripe\Customer;
@@ -52,6 +53,9 @@ class OrderController extends Controller
 
     public function register(Request $request)
     {
+        $card = $request->post('card');
+        $product = $request->post('product');
+        $customer = $request->post('customer');
 
         //validation data
         $validator = Validator::make($request->all(), [
@@ -60,19 +64,20 @@ class OrderController extends Controller
             'customer.lastName' => 'required|min:3',
             'customer.email' => 'required|email',
             'customer.address' => 'required|min:3',
-            'card.cardNumber' => 'required|integer|min:16',
-            'card.year' => 'required|integer|min:4',
+            'card.cardNumber' => 'required|size:16',
+            'card.year' => 'required|size:4',
             'card.month'=> 'required|max:2',
-            'card.cvv' => 'required|integer|min:3',
+            'card.cvv' => 'required|size:3',
             'product.id' => 'required|integer'
         ]);
         if($validator->fails()){
             return Response::json($validator->errors(), 400);
         }
 
-        $card = $request->post('card');
-        $product = $request->post('product');
-        $customer = $request->post('customer');
+        if(! Product::find($product['id'])){
+            return Response::json(['product.id'=> "product.id isn't valid"], 400);
+        }
+
 
         //check card info
         $stripe = new StripePayment();
@@ -96,6 +101,7 @@ class OrderController extends Controller
         //save to db
         if(isset($res['id'])){
             $orderId = $this->saveOrder($product, $card, $customer);
+            $this->sendNotificationEmail($product, $card, $customer, $orderId);
             return Response::json(['orderId'=> $orderId]);
         }
         else{
@@ -124,4 +130,17 @@ class OrderController extends Controller
         $orderProduct->save();
         return $order->id;
     }
+
+    private function sendNotificationEmail($product, $card, $customer, $orderId){
+        $order = Order::findOrFail($orderId);
+        $products = OrderProduct::fullGet(['order_id'=>$orderId]);
+        Mail::send('order.reminder', ['order'=>$order, 'products'=> $products], function ($m)  {
+            $m->from('hello@fashion.com', 'A new Order');
+
+            $m->to("alirezaeyan.javad@gmail.com", "Javad")->subject('Your Reminder!');
+        });
+
+    }
+
+
 }
