@@ -6,7 +6,10 @@ A project to buy a product in Laravel Framework
 <h3>Introduction</h3>
 This project makes an application to buy order a product. You can buy a product directly or add it to the basket. 
 Although the basket is unavailable for now, the DB has been designed to support multi-products in an order. To order a product,
- first, the customer must choose the product from the list of products wit clicking on the buy button. After that, a checkout form including Customer Info and Card info must be field. Next, the information will be sent to the server to register an order and send a notification email to the administrator. Finally, the details of the order will be shown on another page.
+ first, the customer must choose the product from the list of products wit clicking on the buy button. After that, 
+ a checkout form including Customer Info and Card info must be field. Next, the information will be sent to the server
+  to register an order and send a notification email to the administrator and customer(If you couldn't find the email in inbox, please check the inbox). Finally, the details of the order will be shown 
+  on another page.
 You can see the online version here: <a href="http://orderproduct.herokuapp.com/" target="_blank">click here</a>
 
 
