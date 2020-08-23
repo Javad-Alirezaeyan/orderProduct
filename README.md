@@ -91,8 +91,8 @@ Product
 ##screenshots
 
 
-![alt text](https://github.com/Javad-Alirezaeyan/orderProduct/blob/master/screenshots/1.png)
-![alt text](https://github.com/Javad-Alirezaeyan/orderProduct/blob/master/screenshots/2.png)
+![alt text](https://github.com/Javad-Alirezaeyan/orderProduct/blob/master/screenshots/6.png)
+![alt text](https://github.com/Javad-Alirezaeyan/orderProduct/blob/master/screenshots/7.png)
 
 ![alt text](https://github.com/Javad-Alirezaeyan/orderProduct/blob/master/screenshots/3.png)
 
