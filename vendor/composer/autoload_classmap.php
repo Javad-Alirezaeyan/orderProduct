@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Brand' => $baseDir . '/app/Brand.php',
+    'App\\Console\\Commands\\Install' => $baseDir . '/app/Console/Commands/Install.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
@@ -22,6 +23,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\CheckoutValidationRequest' => $baseDir . '/app/Http/Requests/CheckoutValidationRequest.php',
+    'App\\Jobs\\SendEmailJob' => $baseDir . '/app/Jobs/SendEmailJob.php',
     'App\\Order' => $baseDir . '/app/Order.php',
     'App\\OrderProduct' => $baseDir . '/app/OrderProduct.php',
     'App\\Product' => $baseDir . '/app/Product.php',
