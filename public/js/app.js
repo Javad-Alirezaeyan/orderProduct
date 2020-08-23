@@ -2086,6 +2086,9 @@ __webpack_require__.r(__webpack_exports__);
     setCardInfo: function setCardInfo(card) {
       this.$store.dispatch('setCardInfo', card);
     }
+  },
+  created: function created() {
+    this.setInfo();
   }
 });
 

@@ -109,6 +109,9 @@
             setCardInfo(card){
                 this.$store.dispatch('setCardInfo', card);
             }
+        },
+        created() {
+            this.setInfo();
         }
     }
 </script>
