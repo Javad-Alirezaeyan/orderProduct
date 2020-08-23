@@ -39,7 +39,7 @@
                     <td>{{  $order->created_at }}</td>
                     <td><span class="badge badge-success">Success</span></td>
                     <td>
-                        <a href="{{ subdirUrl("order/". $order->id) }}" class="btn btn-info btn-sm " role="button" aria-disabled="true"> View</a>
+                        <a href="{{ url("order/". $order->id) }}" class="btn btn-info btn-sm " role="button" aria-disabled="true"> View</a>
 
                     </td>
                 </tr>
