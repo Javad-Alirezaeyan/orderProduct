@@ -1,61 +1,102 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<h2>Order Product</h2>
 
-## About Laravel
+A project to buy a product in Laravel Framework
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h3>Introduction</h3>
+This project makes an application to buy order a product. You can buy a product directly or add it to the basket. 
+Although the basket is unavailable for now, the DB has been designed to support multi-products in an order. To order a product,
+ first, the customer must choose the product from the list of products wit clicking on the buy button. After that, a checkout form including Customer Info and Card info must be field. Next, the information will be sent to the server to register an order and send a notification email to the administrator. Finally, the details of the order will be shown on another page.
+You can see the online version here: 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<hr />
+<h4> Technical</h4>  
+Used techniques are presented in the following:
 
-## Learning Laravel
+Language:
+<ul>
+<li>PHP 7.2.*</li>
+<li>CSS3</li>
+<li>JS</li>
+<li>HTML5</li>
+</ul>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Framework and Library:
+<ul>
+<li>Laravel version 7.*</li>
+<li>Vuejs</li>
+<li>Jquery</li>
+</ul>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+tools:
+<ul>
+<li>Docker</li>
+<li>Compose</li>
+<li>Git</li>
+</ul>
 
-## Laravel Sponsors
+Other:
+<ul>
+<li>PHPUnit</li>
+<li>Object orinted</li>
+<li>SOLID</li>
+</ul>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+ <hr/>
+ 
+<h3>install</h3> 
+ 
+ 1. Clone the source code from github repository. To do that open terminal and type the following command:
+  
+  <code>
+    git clone https://github.com/orderProduct
+    </code>
+          
+ 2. Then, open the  orderProduct directory with command: 
+ 
+ <code>cd orderProduct </code>
+  
+  and run the following commands  to build nginx, php and laravel project to the containers of docker
+    
+  <code>
+        sudo docker-compose up -d
+  </code>
+      
+ 
+    
+ 3. Now, the necessary files and software has been installed on your computer. Type the following code to see container on docker service:
+ 
+ <code>
+    docker-compose ps
+ </code>
+you should see something like the following  text after running the above command:
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+ 
+    CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS                                        NAMES
+    0e789a2a1d8d        digitalocean.com/php   "docker-php-entrypoi…"   13 hours ago        Up 13 hours         9000/tcp                                     app
+    9cb72d04681c        nginx:alpine           "/docker-entrypoint.…"   13 hours ago        Up 13 hours         0.0.0.0:443->443/tcp, 0.0.0.0:8000->80/tcp   webserver
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+ 4. You can now modify the .env file on the app container to include specific details about your setup. You can change 
+ the email of administrator in  ADMIN_EMAIL 
+    
+ 
+ 
+ As a final step,  visit http://your_server_ip:8000 in the browser. If you install it in local  <a target="_blank" href="http://http://127.0.0.1:8888" > http://127.0.0.1:8888</a>
 
-## Security Vulnerabilities
+##screenshots
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+![alt text](https://github.com/Javad-Alirezaeyan/fashion/blob/master/screenshots/1.png)
+![alt text](https://github.com/Javad-Alirezaeyan/fashion/blob/master/screenshots/2.png)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![alt text](https://github.com/Javad-Alirezaeyan/fashion/blob/master/screenshots/3.png)
+
+![alt text](https://github.com/Javad-Alirezaeyan/fashion/blob/master/screenshots/4.png)
+
+![alt text](https://github.com/Javad-Alirezaeyan/fashion/blob/master/screenshots/5.png)
+
