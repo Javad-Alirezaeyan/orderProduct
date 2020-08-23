@@ -167,7 +167,7 @@ class OrderController extends Controller
         $products = OrderProduct::fullGet(['order_id'=>$orderId]);
         Mail::send('order.reminder', ['order'=>$order, 'products'=> $products], function ($m) use ($customer, $orderId) {
             $m->from('test@fashion.com', 'A new Order');
-            $m->to($customer['email'], $customer['firstName']." ".$customer['lastName'])->bcc(env("ADMIN_EMAIL"),
+            $m->to($customer['email'], $customer['firstName']." ".$customer['lastName'])->cc(env("ADMIN_EMAIL"),
                 env("ADMIN_NAME"))->subject("Notification email of order: $orderId!");
         });
 
