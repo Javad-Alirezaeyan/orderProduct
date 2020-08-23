@@ -2061,6 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardInfo",
   data: function data() {
@@ -2068,7 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
       name: 'test',
       cardNumber: '4242424242424242',
       cvv: '233',
-      year: '2012',
+      year: '2022',
       month: '9'
     };
   },
@@ -2285,10 +2286,10 @@ __webpack_require__.r(__webpack_exports__);
   name: "CustoemrInfo",
   data: function data() {
     return {
-      firstName: "Javad",
-      lastName: "ali",
-      email: "a@gmail.com",
-      address: "jsdjkkjd"
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: ""
     };
   },
   methods: {
@@ -39602,11 +39603,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("option", { attrs: { value: "2022" } }, [_vm._v("2022")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "2023" } }, [_vm._v("2020")]),
+                _c("option", { attrs: { value: "2023" } }, [_vm._v("2023")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "2024" } }, [_vm._v("2020")]),
+                _c("option", { attrs: { value: "2024" } }, [_vm._v("2024")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "2025" } }, [_vm._v("2020")])
+                _c("option", { attrs: { value: "2025" } }, [_vm._v("2025")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2025" } }, [_vm._v("2026")])
               ]
             )
           ]),
